@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 crm_validator = RegexValidator(
     regex=r'^\d{2}/\d{5}$',
@@ -23,7 +24,7 @@ class Medico(models.Model):
         validators=[crm_validator],
         help_text= "O CRM deve ter o formato XX/XXXXX (ex:12/23456)."
     )
-    email = models.EmailField()
+    email = models.EmailField(null= True)
     def __str__(self):
         return self.nome
     
