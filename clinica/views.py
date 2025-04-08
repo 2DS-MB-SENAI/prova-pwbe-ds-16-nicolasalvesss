@@ -7,8 +7,14 @@ from datetime import datetime, timedelta
 
 # Vizualizar medicos
 def listar_medicos(request):
-    medico = Medico.objects.all()
-    return render(request, 'listar_medicos.html', {'medico' : medico})
+    medicos = Medico.objects.all()
+    especialidade = request.GET.get('especialidade')  
+    if especialidade:
+        medico = Medico.objects.filter(especialidade__icontains=especialidade) 
+        return render(request, 'listar_medicos.html', {'medico' : medico})
+    else:
+        medico = Medico.objects.all()
+    return render(request, 'listar_medicos.html', {'medicos' : medicos})
 
 # Criar consulta
 def criar_consulta(request):
@@ -29,13 +35,3 @@ def detalhes_consulta(request , pk):
     return HttpResponse (f"Sua consulta: Paciente = {consulta.paciente} \n data = {consulta.data} \n medico = {consulta.medico}")
 
 
-# Filtrar por especialidade
-def filtrar_medicos(request):
-    especialidade = request.GET.get('especialidade')  
-    if especialidade:
-        medicos = Medico.objects.filter(especialidade__icontains=especialidade) 
-    else:
-
-        medicos = Medico.objects.all()
-
-    return render(request, 'listar_medicos.html', {'medicos': medicos})

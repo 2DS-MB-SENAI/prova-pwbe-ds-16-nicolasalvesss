@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Preencha os campos da maneira correta</h1>
-    <form method="post" action="listar_medicos.html">
+    <form method="post" action="{% url 'listar_medicos.html' %}">
         {% csrf_token %}
         {{form.as_p}}
         <button type="submit">enviar</button>

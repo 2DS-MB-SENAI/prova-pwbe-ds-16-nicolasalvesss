@@ -5,5 +5,5 @@ urlpatterns = [
     path('medicos/', views.listar_medicos , name="home"),
     path('consulta/nova', views.criar_consulta , name="criar_nova"),#Para criar um novo item
     path('consultas/ <int:pk>', views.detalhes_consulta),#Modificar o item referenciado
-    path('filtro/', views.filtrar_medicos , name="filtro_medico" )
+ 
 ]
