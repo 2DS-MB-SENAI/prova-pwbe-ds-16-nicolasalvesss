@@ -1,5 +1,9 @@
 from django.db import models
 
+crm_validator = RegexValidator(
+    regex=r'^\d{2}/\d{5}$',
+    message="O formato do CRM deve ser XX/XXXXX. Todos os X's são números",
+)
 class Medico(models.Model):
     nome = models.CharField(max_length=255)
     PEDIATRA = 'Pediatra' , 'PD'
@@ -14,7 +18,11 @@ class Medico(models.Model):
         ('CAR' , 'Car'),
     ]
     especialidade = models.CharField(max_length=50 , choices=especialidades_choices)
-    crm = models.CharField(max_length=255, unique= True ) #Não esquecer de formatar da maneira correta
+    crm = models.CharField(
+        max_length= 8 ,
+        validators=[crm_validator],
+        help_text= "O CRM deve ter o formato XX/XXXXX (ex:12/23456)."
+    )
     email = models.EmailField()
     def __str__(self):
         return self.nome
