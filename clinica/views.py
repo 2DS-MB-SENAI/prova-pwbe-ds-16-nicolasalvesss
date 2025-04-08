@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect , get_object_or_404
 from django.http import HttpResponse
 from .models import Medico , Consulta
 from .forms import ConsultaForm
-from datetime import datetime, timedelta
+from datetime import timezone
 
 
 # Vizualizar medicos
@@ -21,8 +21,9 @@ def criar_consulta(request):
     if request.method == 'POST':
         form = ConsultaForm(request.POST)
         if form.is_valid():
+
             form.save()
-            return redirect('form_consulta')
+            return redirect('home')
         else:
             return render(request)
     else:

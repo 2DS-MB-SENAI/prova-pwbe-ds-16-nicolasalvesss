@@ -5,6 +5,6 @@ from django.urls import path
 urlpatterns = [
     path('api/servicos/', views.read_servico ),
     path('api/agendamentos/', views.read_agendamento),
-    path('api/servico//', views.pegar_servico),
-    path('api/agendamentos//', views.pegar_agendamento),
+    path('api/servico/<int:pk>', views.pegar_servico),
+    path('api/agendamentos/<int:pk>', views.pegar_agendamento),
 ]
