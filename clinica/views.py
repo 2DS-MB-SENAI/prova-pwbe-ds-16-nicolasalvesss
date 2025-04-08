@@ -2,11 +2,7 @@ from django.shortcuts import render, redirect , get_object_or_404
 from django.http import HttpResponse
 from .models import Medico , Consulta
 from .forms import ConsultaForm
-
-# from rest_framework.response import Response
-# from rest_framework.decorators import api_view
-# from rest_framework import status
-# from .serializers import LivroSerializer
+from datetime import datetime, timedelta
 
 
 # Vizualizar medicos
@@ -21,6 +17,8 @@ def criar_consulta(request):
         if form.is_valid():
             form.save()
             return redirect('form_consulta')
+        else:
+            return render(request)
     else:
         form = ConsultaForm()
     return render(request, 'form_consulta.html' , {'form' : form})
@@ -32,4 +30,12 @@ def detalhes_consulta(request , pk):
 
 
 # Filtrar por especialidade
+def filtrar_medicos(request):
+    especialidade = request.GET.get('especialidade')  
+    if especialidade:
+        medicos = Medico.objects.filter(especialidade__icontains=especialidade) 
+    else:
 
+        medicos = Medico.objects.all()
+
+    return render(request, 'listar_medicos.html', {'medicos': medicos})
