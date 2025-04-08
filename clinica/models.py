@@ -10,11 +10,12 @@ class Medico(models.Model):
         ('PEDIATRA', 'Pediatra'),
         ('FISIOTERAPEUTA', 'Fisioterapeuta'),
         ('GINECOLOGISTA', 'Ginecologista'),
-        ('CARDIOLOGISTA' , 'CAR'),
+        ('CARDIOLOGISTA' , 'Cardiologista'),
+        ('CAR' , 'Car'),
     ]
     especialidade = models.CharField(max_length=50 , choices=especialidades_choices)
-    crm = models.CharField(max_length=255) #Não esquecer de formatar da maneira correta
-    
+    crm = models.CharField(max_length=255, unique= True ) #Não esquecer de formatar da maneira correta
+    email = models.EmailField(null=True)
     def __str__(self):
         return self.nome
     
@@ -32,3 +33,6 @@ class Consulta(models.Model):
     ]
     status = models.CharField(max_length=9 , choices=status_choices)
     detalhes = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.paciente
