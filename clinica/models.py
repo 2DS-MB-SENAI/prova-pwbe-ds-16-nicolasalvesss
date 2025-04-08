@@ -5,10 +5,12 @@ class Medico(models.Model):
     PEDIATRA = 'Pediatra' , 'PD'
     FISIOTERAPEUTA =  'Fisioterapeuta' , 'FI'
     GINECOLOGISTA = 'Ginecologista' , 'GN'
+    CARDIOLOGISTA = 'CAR' , 'Cardiologista'
     especialidades_choices = [
         ('PEDIATRA', 'Pediatra'),
         ('FISIOTERAPEUTA', 'Fisioterapeuta'),
         ('GINECOLOGISTA', 'Ginecologista'),
+        ('CARDIOLOGISTA' , 'CAR'),
     ]
     especialidade = models.CharField(max_length=50 , choices=especialidades_choices)
     crm = models.CharField(max_length=255) #Não esquecer de formatar da maneira correta
