@@ -29,3 +29,7 @@ def criar_consulta(request):
 def detalhes_consulta(request , pk):
     consulta = get_object_or_404(Consulta , pk=pk)
     return HttpResponse (f"Sua consulta: Paciente = {consulta.paciente} \n data = {consulta.data} \n medico = {consulta.medico}")
+
+
+# Filtrar por especialidade
+
